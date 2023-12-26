@@ -60,7 +60,11 @@ std::vector<BinaryTree> parse(std::vector<std::pair<std::string, std::string>> &
     std::vector<BinaryTree> res;
     for (std::vector<std::pair<std::string, std::string>> line : split_vector_by_nl(lexed)) {
         BinaryTree btree;
-        // handle btree
+        int last_handled = 0;
+        btree.add_element(line[0]);
+        for (int i = 1; i < line.size(); i++) {
+            
+        }
     }
     return res;
 }
