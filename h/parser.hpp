@@ -8,12 +8,12 @@ class BinaryTree {
         std::vector<std::pair<int, int>> children;
         int len = 0;
     public:
+        int get_len();
         void add_element(std::pair<std::string, std::string> element);
-        void set_parent(int child, int parent);
-        void set_child(int child, int parent);
+        void set_relative(int child, int parent);
         int get_parent(int child);
         std::pair<int, int> get_children(int parent);
-        std::pair<std::string, std::string> get_element_by_index(int index);
+        std::pair<std::string, std::string> get_element(int index);
         int find_root();
 };
 
