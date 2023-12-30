@@ -9,6 +9,7 @@ class BinaryTree {
         int len = 0;
     public:
         int get_len();
+        int get_last_index();
         void add_element(std::pair<std::string, std::string> element);
         void set_relative(int child, int parent);
         int get_parent(int child);

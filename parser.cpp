@@ -8,6 +8,10 @@ int BinaryTree::get_len() {
     return this->len;
 }
 
+int BinaryTree::get_last_index() {
+    return this->get_len() - 1;
+}
+
 void BinaryTree::add_element(std::pair<std::string, std::string> element) {
     this->elements.push_back(element);
     this->parents.push_back(len);
@@ -16,6 +20,13 @@ void BinaryTree::add_element(std::pair<std::string, std::string> element) {
 }
 
 void BinaryTree::set_relative(int child, int parent) {
+    if (this->parents[child] != child) {
+        if (this->children[child].first == child) {
+            this->children[this->parents[child]].first = -1;
+        } else {
+            this->children[this->parents[child]].second = -1;
+        }
+    }
     this->parents[child] = parent;
     if (this->children[parent].first != -1) {
         this->children[parent].first = child;
@@ -68,14 +79,14 @@ std::vector<BinaryTree> parse(std::vector<std::pair<std::string, std::string>> &
             if (line[i].first == "int") {
                 // int
                 btree.add_element(line[i]);
-                btree.set_relative(i, last_handled); last_handled = i;
+                btree.set_relative(btree.get_last_index(), last_handled); last_handled = btree.get_last_index();
             } else if (line[i].first == "br") {
                 // br
                 if (line[i].second == "(") {
                     btree.add_element(std::make_pair("br", "()"));
-                    btree.set_relative(i, last_handled); last_handled = i;
+                    btree.set_relative(btree.get_last_index(), last_handled); last_handled = btree.get_last_index();
                 } else if (line[i].second == ")") {
-                    while (btree.get_element(last_handled).first != "br") {
+                    while (btree.get_element(last_handled).first != "br" && last_handled != btree.get_parent(last_handled)) {
                         last_handled = btree.get_parent(last_handled);
                     }
                     last_handled = btree.get_parent(last_handled);
@@ -87,29 +98,37 @@ std::vector<BinaryTree> parse(std::vector<std::pair<std::string, std::string>> &
                         if (btree.get_element(btree.get_parent(last_handled)).first == "op") {
                             if (btree.get_element(btree.get_parent(last_handled)).second == "+" || btree.get_element(btree.get_parent(last_handled)).second == "-") {
                                 btree.add_element(line[i]);
-                                btree.set_relative(i, btree.get_parent(last_handled));
-                                btree.set_relative(last_handled, i); last_handled = i;
+                                btree.set_relative(btree.get_last_index(), btree.get_parent(last_handled));
+                                btree.set_relative(last_handled, btree.get_last_index()); last_handled = btree.get_last_index();
                             } else if (btree.get_element(btree.get_parent(last_handled)).second == "*" || btree.get_element(btree.get_parent(last_handled)).second == "/") {
                                 
                             }
                         } else if (btree.get_element(btree.get_parent(last_handled)).first == "br") {
                             btree.add_element(line[i]);
-                            btree.set_relative(i, btree.get_parent(last_handled));
-                            btree.set_relative(last_handled, i); last_handled = i;
+                            btree.set_relative(btree.get_last_index(), btree.get_parent(last_handled));
+                            btree.set_relative(last_handled, btree.get_last_index()); last_handled = btree.get_last_index();
                         } else if (last_handled == btree.get_parent(last_handled)) {
                             btree.add_element(line[i]);
-                            btree.set_relative(last_handled, i); last_handled = i;
+                            btree.set_relative(last_handled, btree.get_last_index()); last_handled = btree.get_last_index();
+                        }
+                    } else if (btree.get_element(last_handled).first == "op") {
+                        btree.add_element(line[i]);
+                        if (btree.get_element(last_handled).second == "+" || btree.get_element(last_handled).second == "-") {
+                            if (last_handled != btree.get_parent(last_handled)) {
+                                btree.set_relative(btree.get_last_index(), btree.get_parent(last_handled));
+                            }
+                            btree.set_relative(last_handled, btree.get_last_index()); last_handled = btree.get_last_index();
                         }
                     }
                 } else if (line[i].second == "*" || line[i].second == "/") {
                     
                 }
             }
-            std::cout << "iteration " << i << " passed :)\n";
-            for (int i = 0 ; i < btree.get_len(); i++) {
-                std::pair<std::string, std::string> child = btree.get_element(i);
-                std::pair<std::string, std::string> parent = btree.get_element(btree.get_parent(i));
-                std::cout << "child: " << child.second << ", parent: " << parent.second << "\n";
+            std::cout << "iteration " << btree.get_last_index() << " passed :) " << "last_handled = " << last_handled << "\n";
+            for (int j = 0 ; j < btree.get_len(); j++) {
+                std::pair<std::string, std::string> child = btree.get_element(j);
+                std::pair<std::string, std::string> parent = btree.get_element(btree.get_parent(j));
+                std::cout << "child: " << child.second << ", parent: " << parent.second << ", indexes: " << j << " " << btree.get_parent(j) << "\n";
             }
         }
         res.push_back(btree);

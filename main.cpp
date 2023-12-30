@@ -7,7 +7,8 @@
 #include "h/parser.hpp"
 
 int main() {
-    std::vector<std::string> file_content = read_file_content("code/main.brl");
+    std::string path_to_file = "code/main.brl";
+    std::vector<std::string> file_content = read_file_content(path_to_file);
     std::vector<std::pair<std::string, std::string>> lexed = lex(file_content);
     std::vector<BinaryTree> parsed = parse(lexed);
     // for (int i = 0 ; i < parsed[0].get_len(); i++) {
