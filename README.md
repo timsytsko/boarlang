@@ -7,7 +7,7 @@ vars:
 var int a, b, c;
 var char q, w, e;
 var float balance;
-balamce = 4.45;
+balance = 4.45;
 q = 'a';
 ```
 
