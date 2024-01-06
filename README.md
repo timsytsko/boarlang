@@ -43,3 +43,20 @@ comments:
 multi-line comment
 */
 ```
+
+functions:
+```
+var func get_sum = (var int a, var int b) {
+    return a + b;
+}
+
+var int res = get_sum(34, -7);
+```
+
+main func:
+```
+// start point of any program is main func
+var int main = () {
+    // your code here
+}
+```
