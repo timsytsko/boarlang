@@ -4,9 +4,11 @@ Basic syntax examples:
 
 vars:
 ```
-var int a, b = 3, c = 45;
-var char q, w = '$', e = 'p';
-var float balance = 3.23;
+var int a, b, c;
+var char q, w, e;
+var float balance;
+balamce = 4.45;
+q = 'a';
 ```
 
 if statements:
@@ -46,17 +48,18 @@ multi-line comment
 
 functions:
 ```
-var func get_sum = (var int a, var int b) {
+func int get_sum;
+get_sum = (var int a, var int b) {
     return a + b;
 }
 
 var int res = get_sum(34, -7);
 ```
 
-main func:
+start point:
 ```
-// start point of any program is main func
-var int main = () {
+// start point of any program is keyword main and curly brackets
+main {
     // your code here
 }
 ```
