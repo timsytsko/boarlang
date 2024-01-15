@@ -1,4 +1,0 @@
-operator (op): + - * /
-integer (int):
-newline (nl): ;
-brackets (br): ( ) ()

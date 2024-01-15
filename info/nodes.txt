@@ -1,0 +1,33 @@
+operator:
+    members: +, -, *, /, &&, ||, ==, !=, >, <, >=, <=
+    parent: brackets, operator, keyword
+    children: number, operator, brackets, var, func_call
+
+number:
+    members: "any number, like: 4, 5, 6.78, 1.6606"
+    parent: keyword, operator, brackets
+    children: none
+
+keyword:
+    members: main, var, func, return, continue, break, if, while
+    parent: none
+    children: number, operator, brackets, func_call, type
+
+type:
+    members: int, float, char
+    parent: keyword
+    children: none
+
+brackets:
+    members: (), {}
+    parent: any
+    children: any, but only one
+
+assignment:
+    members: =, +=, -=, *=, /=, ++, --
+    parent: none
+    children: var, number
+
+start:
+    members: start
+    children: all

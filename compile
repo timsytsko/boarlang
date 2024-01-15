@@ -1,0 +1,1 @@
+clang++ -o boarlang main.cpp reader.cpp lexer.cpp parser.cpp

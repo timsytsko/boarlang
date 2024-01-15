@@ -1,1 +1,10 @@
-3 * (1 + 5 * (3 - 7));
+func int get_sum(var int a, var int b) {
+    return(a + b);
+}
+main {
+    var int i = 0, res = 0;
+    while (i < 10) {
+        res += i * (i + 1);
+        i += 1;
+    }
+}

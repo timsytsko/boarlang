@@ -1,0 +1,17 @@
+operator: +, -, *, /, &&, ||, ==, !=, >, <, >=, <=
+
+number: "any number, like: 4, 5, 6.78, 1.6606"
+
+keyword: main, var, func, return, continue, break, if, for, while
+
+type: int, float, char
+
+brackets: (, ), {, }
+
+assignment: =, +=, -=, *=, /=
+
+separator: ,
+
+newline: ;
+
+

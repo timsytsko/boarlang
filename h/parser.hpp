@@ -1,21 +1,23 @@
 #include <vector>
 #include <string>
 
-class BinaryTree {
-    private:
-        std::vector<std::pair<std::string, std::string>> elements;
-        std::vector<int> parents;
-        std::vector<std::pair<int, int>> children;
-        int len = 0;
+class Node {
     public:
-        int get_len();
-        int get_last();
-        void add_element(std::pair<std::string, std::string> element);
-        void set_relative(int child, int parent);
-        int get_parent(int child);
-        std::pair<int, int> get_children(int parent);
-        std::pair<std::string, std::string> get_element(int index);
-        int find_root();
+        std::string tag;
+        std::string value;
+        Node(std::string _tag, std::string _value);
 };
 
-std::vector<BinaryTree> parse(std::vector<std::pair<std::string, std::string>> &lexed);
+class AbstractTree {
+    private:
+        std::vector<int> parents;
+        std::vector<vector<int>> children;
+        std::vector<Node> elements;
+        int len = 0;
+    public:
+        int get_last();
+        void add(Node el);
+        void unparent(int child, int parent);
+        void parent(int child, int parent);
+        Node get_element(int index);
+};

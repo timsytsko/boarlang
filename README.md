@@ -24,10 +24,7 @@ if (x == y && b > 1) {
 
 for:
 ```
-for (var int i = 0, i < 10, i += 1) {
-    break;
-    continue;
-}
+we don't need for
 ```
 
 while:
@@ -48,8 +45,7 @@ multi-line comment
 
 functions:
 ```
-func int get_sum;
-get_sum = (var int a, var int b) {
+func int get_sum = (var int a, var int b) {
     return a + b;
 }
 
